@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<title>Buzz Duel — 2-Player Quiz</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div id="stage" class="stage">
+
+  <!-- Screen 1: Landing -->
+  <section id="screen-landing" class="screen active">
+    <div class="landing-inner">
+      <img src="assets/logo.png" alt="Logo" class="landing-logo" />
+      <h1 class="game-title">BUZZ<span class="accent">DUEL</span></h1>
+      <p class="subtitle">2-Player Trivia Showdown</p>
+
+      <div id="load-status" class="load-status">No question file loaded.</div>
+
+      <div class="landing-actions">
+        <label id="file-picker-btn" class="btn btn-secondary" for="file-input">Load Questions (.xlsx / .csv)</label>
+        <input type="file" id="file-input" accept=".xlsx,.xls,.csv" hidden />
+        <button id="use-sample-btn" class="btn btn-secondary">Use Sample Questions</button>
+        <a id="template-link" class="btn btn-secondary" href="data/question-template.xlsx" download>Download Template</a>
+      </div>
+
+      <button id="start-btn" class="btn btn-start" disabled>Let's Start Playing</button>
+    </div>
+  </section>
+
+  <!-- Screen 2: Countdown -->
+  <section id="screen-countdown" class="screen">
+    <div class="countdown-inner">
+      <div class="round-label" id="round-label">Round 1</div>
+      <div id="countdown-number" class="countdown-number">3</div>
+      <div class="get-ready">Get Ready...</div>
+    </div>
+  </section>
+
+  <!-- Screen 3: Buzzer Phase -->
+  <section id="screen-buzzer" class="screen">
+    <button id="buzz-p1" class="buzzer buzzer-left" type="button">
+      <span class="player-name">PLAYER 1</span>
+      <span class="buzz-word">BUZZ!</span>
+    </button>
+
+    <div class="center-panel">
+      <div class="scoreboard">
+        <span id="score-p1" class="score">0</span>
+        <span class="score-sep">–</span>
+        <span id="score-p2" class="score">0</span>
+      </div>
+      <div class="timer-ring">
+        <span id="buzzer-timer" class="timer-number">5</span>
+      </div>
+      <div class="question-box">
+        <p id="buzzer-question-text" class="question-text"></p>
+      </div>
+      <div class="progress-label" id="progress-label">Question 1</div>
+    </div>
+
+    <button id="buzz-p2" class="buzzer buzzer-right" type="button">
+      <span class="player-name">PLAYER 2</span>
+      <span class="buzz-word">BUZZ!</span>
+    </button>
+  </section>
+
+  <!-- Screen 4: Answering Phase -->
+  <section id="screen-answer" class="screen">
+    <div class="answer-header">
+      <div class="scoreboard small">
+        <span id="answer-score-p1" class="score">0</span>
+        <span class="score-sep">–</span>
+        <span id="answer-score-p2" class="score">0</span>
+      </div>
+      <div id="active-player-banner" class="active-player-banner">PLAYER 1's TURN</div>
+      <div class="timer-ring small">
+        <span id="answer-timer" class="timer-number">8</span>
+      </div>
+    </div>
+
+    <div class="answer-question-box">
+      <p id="answer-question-text" class="question-text"></p>
+    </div>
+
+    <div class="answer-grid">
+      <button class="answer-choice" data-choice="A" type="button"><span class="choice-letter">A</span><span class="choice-text" id="choice-text-A"></span></button>
+      <button class="answer-choice" data-choice="B" type="button"><span class="choice-letter">B</span><span class="choice-text" id="choice-text-B"></span></button>
+      <button class="answer-choice" data-choice="C" type="button"><span class="choice-letter">C</span><span class="choice-text" id="choice-text-C"></span></button>
+      <button class="answer-choice" data-choice="D" type="button"><span class="choice-letter">D</span><span class="choice-text" id="choice-text-D"></span></button>
+    </div>
+  </section>
+
+  <!-- Feedback flash overlay -->
+  <div id="feedback-flash" class="feedback-flash"></div>
+
+  <!-- Screen 5: Results -->
+  <section id="screen-results" class="screen">
+    <div class="results-inner">
+      <div class="winner-banner" id="winner-banner">PLAYER 1 WINS!</div>
+      <div class="final-scores">
+        <div class="final-score-card" id="final-card-p1">
+          <div class="final-player-label">PLAYER 1</div>
+          <div class="final-score-number" id="final-score-p1">0</div>
+        </div>
+        <div class="vs-label">VS</div>
+        <div class="final-score-card" id="final-card-p2">
+          <div class="final-player-label">PLAYER 2</div>
+          <div class="final-score-number" id="final-score-p2">0</div>
+        </div>
+      </div>
+      <button id="restart-btn" class="btn btn-start" type="button">Play Again</button>
+    </div>
+  </section>
+
+</div>
+
+<script src="vendor/xlsx.full.min.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
